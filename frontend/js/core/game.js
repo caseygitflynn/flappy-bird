@@ -1,5 +1,15 @@
 "use strict";
 
+
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
 var FlappyBird = FlappyBird || {};
 
 FlappyBird.Core = FlappyBird.Core || {};
@@ -62,5 +72,5 @@ FlappyBird.Core.Game.prototype.loop = function () {
   this.bird.draw(this.ctx);
   this.bird.score.draw(this.ctx);
 
-  window.requestAnimationFrame(this.loop.bind(this));
+  requestAnimFrame(this.loop.bind(this));
 };
