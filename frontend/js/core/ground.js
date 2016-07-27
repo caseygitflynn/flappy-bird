@@ -10,7 +10,7 @@ FlappyBird.Core.Ground = function () {
     y : FlappyBird.HEIGHT - 50,
   };
   this.vel = {
-    x : -2,
+    x : -FlappyBird.SCROLL_SPEED,
     y : 0,
   };
   this.sprite = {
