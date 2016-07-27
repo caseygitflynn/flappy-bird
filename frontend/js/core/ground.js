@@ -48,7 +48,6 @@ FlappyBird.Core.Ground.prototype.draw = function (ctx) {
   }
 
   if (FlappyBird.DEBUG) {
-    console.log('here');
       ctx.save();
       {
         ctx.lineWidth = 1;
