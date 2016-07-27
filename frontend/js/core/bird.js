@@ -45,7 +45,7 @@ FlappyBird.Core.Bird.prototype.update = function () {
       this.pos.y++;
     }
   } else {
-    this.acc.y = 0.6;
+    this.acc.y = FlappyBird.GRAVITY;
   }
 
   this.pos.x += this.vel.x;

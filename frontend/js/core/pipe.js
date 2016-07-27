@@ -10,13 +10,13 @@ FlappyBird.Core.Pipe = function (y) {
   };
   this.pos = {
     x : FlappyBird.WIDTH + this.bounds.width / 2,
-    y : FlappyBird.Utils.randomBewteen(150, 345),
+    y : FlappyBird.Utils.randomBewteen(FlappyBird.MIN_PIPE_Y, FlappyBird.MAX_PIPE_Y),
   };
   this.vel = {
-    x : -2,
+    x : -FlappyBird.SCROLL_SPEED,
     y : 0,
   };
-  this.gap = 150;
+  this.gap = FlappyBird.PIPE_GAP;
   this.passed = false;
   this.sprite = {
     top : {

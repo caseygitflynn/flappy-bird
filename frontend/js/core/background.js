@@ -10,7 +10,7 @@ FlappyBird.Core.Background = function () {
     y : 0,
   };
   this.vel = {
-    x : -1,
+    x : -FlappyBird.BACKGROUND_SPEED,
     y : 0,
   };
   this.sprite = {

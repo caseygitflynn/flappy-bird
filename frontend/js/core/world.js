@@ -25,7 +25,7 @@ FlappyBird.Core.World.prototype.update = function () {
       }
     });
 
-    if (this.pipes.length == 0 || this.pipes[this.pipes.length - 1].pos.x < FlappyBird.WIDTH - 200) {
+    if (this.pipes.length == 0 || this.pipes[this.pipes.length - 1].pos.x < FlappyBird.WIDTH - FlappyBird.PIPE_SPACING) {
       this.pipes.push(new FlappyBird.Core.Pipe());
     }
   }
