@@ -6,6 +6,7 @@ FlappyBird.Core = FlappyBird.Core || {};
 
 FlappyBird.Core.Input = function () {
   this.jump = false;
+  this.enabled = true;
 
   this.initListeners();
 };
@@ -20,6 +21,10 @@ FlappyBird.Core.Input.prototype.initListeners = function () {
 };
 
 FlappyBird.Core.Input.prototype._keyDown = function (e) {
+  if (!this.enabled) {
+    return;
+  }
+
   var code = e.keyCode;
 
   switch (code) {
@@ -47,6 +52,9 @@ FlappyBird.Core.Input.prototype._keyUp = function (e) {
 };
 
 FlappyBird.Core.Input.prototype._onDown = function (e) {
+  if (!this.enabled) {
+    return;
+  }
   this.jump = true;
 };
 

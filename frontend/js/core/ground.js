@@ -46,4 +46,18 @@ FlappyBird.Core.Ground.prototype.draw = function (ctx) {
     }
     ctx.restore();
   }
+
+  if (FlappyBird.DEBUG) {
+    console.log('here');
+      ctx.save();
+      {
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#FF0000";
+        ctx.beginPath();
+        ctx.moveTo(0, this.pos.y);
+        ctx.lineTo(FlappyBird.WIDTH, this.pos.y);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
 };

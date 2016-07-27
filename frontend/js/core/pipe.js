@@ -47,6 +47,17 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
   {
     ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y - (this.gap / 2) - (this.sprite.top.height));
     ctx.drawImage(this.image, this.sprite.top.x, this.sprite.top.y, this.sprite.top.width, this.sprite.top.height, 0, 0, this.sprite.top.width, this.sprite.top.height);
+
+    if (FlappyBird.DEBUG) {
+      ctx.save();
+      {
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#FF0000";
+        ctx.strokeRect(0, 0, this.bounds.width, this.sprite.top.height);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
   }
   ctx.restore();
 
@@ -55,6 +66,17 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
   {
     ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y + (this.gap / 2));
     ctx.drawImage(this.image, this.sprite.bottom.x, this.sprite.bottom.y, this.sprite.bottom.width, this.sprite.bottom.height, 0, 0, this.sprite.bottom.width, this.sprite.bottom.height);
+
+    if (FlappyBird.DEBUG) {
+      ctx.save();
+      {
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#FF0000";
+        ctx.strokeRect(0, 0, this.bounds.width, this.sprite.bottom.height);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
   }
   ctx.restore();
 };
