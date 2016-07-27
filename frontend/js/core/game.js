@@ -51,7 +51,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
 
     this.world.update();
 
-    if (this.world.collides(this.bird)) {
+    if (this.world.collidesWithPipe(this.bird) || this.world.collidesWithGround(this.bird)) {
       FlappyBird.MODE = FlappyBird.GAME_OVER;
       this.input.jump = false;
     } 
@@ -59,6 +59,11 @@ FlappyBird.Core.Game.prototype.loop = function () {
 
   if (FlappyBird.MODE == FlappyBird.GAME_OVER) {
     this.bird.update();
+
+    if (this.world.collidesWithGround(this.bird)) {
+      this.bird.vel.y = 0;
+      this.bird.acc.y = 0;
+    } 
 
     if (this.input.jump == true) {
       this.world = new FlappyBird.Core.World();

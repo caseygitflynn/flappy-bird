@@ -34,18 +34,22 @@ FlappyBird.Core.World.prototype.update = function () {
   this.ground.update();
 };
 
-FlappyBird.Core.World.prototype.collides = function (bird) {
+FlappyBird.Core.World.prototype.collidesWithPipe = function (bird) {
   var collides = false;
-
-  if (bird.pos.y + bird.radius >= this.ground.pos.y) {
-    return true;
-  }
 
   this.pipes.forEach(function (pipe, index) {
     collides = pipe.collides(bird) || collides;
   });
 
   return collides;
+};
+
+FlappyBird.Core.World.prototype.collidesWithGround = function (bird) {
+  if (bird.pos.y + bird.radius >= this.ground.pos.y) {
+    return true;
+  }
+
+  return false;
 };
 
 FlappyBird.Core.World.prototype.draw = function (ctx) {
