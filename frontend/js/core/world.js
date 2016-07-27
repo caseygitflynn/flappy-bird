@@ -10,27 +10,34 @@ FlappyBird.Core.World = function () {
     height : FlappyBird.HEIGHT,
   };
   this.pipes = [new FlappyBird.Core.Pipe()];
+  this.background = new FlappyBird.Core.Background();
+  this.ground = new FlappyBird.Core.Ground();
 };
 
 FlappyBird.Core.World.prototype.update = function () {
   var self = this;
 
-  this.pipes.forEach(function (pipe, index) {
-    pipe.update();
-    if (pipe.pos.x + pipe.bounds.width < 0) {
-      self.pipes.splice(index, 1);
-    }
-  });
+  if (FlappyBird.MODE === FlappyBird.PLAY) {
+    this.pipes.forEach(function (pipe, index) {
+      pipe.update();
+      if (pipe.pos.x + pipe.bounds.width < 0) {
+        self.pipes.splice(index, 1);
+      }
+    });
 
-  if (this.pipes.length == 0 || this.pipes[this.pipes.length - 1].pos.x < FlappyBird.WIDTH - 200) {
-    this.pipes.push(new FlappyBird.Core.Pipe());
+    if (this.pipes.length == 0 || this.pipes[this.pipes.length - 1].pos.x < FlappyBird.WIDTH - 200) {
+      this.pipes.push(new FlappyBird.Core.Pipe());
+    }
   }
+
+  this.background.update();
+  this.ground.update();
 };
 
 FlappyBird.Core.World.prototype.collides = function (bird) {
   var collides = false;
 
-  if (bird.pos.y + bird.radius >= this.bounds.height) {
+  if (bird.pos.y + bird.radius >= this.ground.pos.y) {
     return true;
   }
 
@@ -44,9 +51,12 @@ FlappyBird.Core.World.prototype.collides = function (bird) {
 FlappyBird.Core.World.prototype.draw = function (ctx) {
   this.clear(ctx);
 
+  this.background.draw(ctx);
   this.pipes.forEach(function (pipe, index) {
     pipe.draw(ctx);
   });
+
+  this.ground.draw(ctx);
 };
 
 FlappyBird.Core.World.prototype.clear = function (ctx) {

@@ -28,7 +28,7 @@ FlappyBird.Core.Pipe = function (y) {
     bottom : {
       width: 52,
       height : 242,
-      x : 53,
+      x : 52,
       y : 25,
     }
   };

@@ -7,23 +7,40 @@ FlappyBird.Core = FlappyBird.Core || {};
 FlappyBird.Core.Score = function () {
   this.score = 0;
   this.pos = {
-    x : 190,
+    x : Math.floor(FlappyBird.WIDTH / 2),
     y : 40,
   };
+  this.sprite = {
+    width : 18,
+    height : 20,
+    x : 108,
+    y : 0,
+  };
+  this.image = new Image();
+  this.image.src = "img/sprites.png";
 };
 
 FlappyBird.Core.Score.prototype.increase = function () {
   this.score++;
 };
 
+FlappyBird.Core.Score.prototype._getNumberSprite = function (number) {
+  return parseInt(number, 10) * this.sprite.width + this.sprite.x;
+};
+
+FlappyBird.Core.Score.prototype._getScoreWidth = function () {
+  return this.score.toString(10).length * this.sprite.width;
+};
+
 FlappyBird.Core.Score.prototype.draw = function (ctx) {
-  ctx.save();
-  {
-    ctx.translate(this.pos.x, this.pos.y);
-    ctx.font = "40px Monaco";
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fillText(this.score, 0, 0);
-  }
-  ctx.restore();
+  for (var i = 0; i < this.score.toString(10).length; i = i + 1) {
+    ctx.save();
+    {
+      ctx.translate(this.pos.x - this._getScoreWidth() / 2, this.pos.y);
+      var offset = i * this.sprite.width;
+      ctx.translate(offset, 0);
+      ctx.drawImage(this.image, this._getNumberSprite(this.score.toString(10)[i]), this.sprite.y, this.sprite.width, this.sprite.height, 0, 0, this.sprite.width, this.sprite.height);
+    }
+    ctx.restore();
+  };
 };

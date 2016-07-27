@@ -28,6 +28,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
 
   if (FlappyBird.MODE == FlappyBird.IDLE) {
     this.bird.update();
+    this.world.update();
 
     if (this.input.jump == true) {
       FlappyBird.MODE = FlappyBird.PLAY;
