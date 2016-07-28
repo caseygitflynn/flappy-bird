@@ -16,10 +16,18 @@ FlappyBird.Core.GameOver = function () {
     y : 0,
   };
   this.sprite = {
-    width : 188,
-    height : 38,
-    x : 110,
-    y : 64,
+    title : {
+      width : 188,
+      height : 38,
+      x : 110,
+      y : 64,
+    },
+    summary : {
+      width : 226,
+      height : 116,
+      x : 0,
+      y : 918,
+    }
   };
   this.image = new Image();
   this.image.src = "img/sprites.png";
@@ -53,10 +61,19 @@ FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
     return;
   }
   
+  // TITLE
   ctx.save();
   {
-    ctx.translate(this.pos.x - (this.sprite.width / 2), this.pos.y);
-    ctx.drawImage(this.image, this.sprite.x, this.sprite.y, this.sprite.width, this.sprite.height, 0, 0, this.sprite.width, this.sprite.height);
+    ctx.translate(this.pos.x - (this.sprite.title.width / 2), this.pos.y);
+    ctx.drawImage(this.image, this.sprite.title.x, this.sprite.title.y, this.sprite.title.width, this.sprite.title.height, 0, 0, this.sprite.title.width, this.sprite.title.height);
+  }
+  ctx.restore();
+
+  // SUMMARY
+  ctx.save();
+  {
+    ctx.translate(this.pos.x - (this.sprite.summary.width / 2), this.pos.y + this.sprite.title.height + 20);
+    ctx.drawImage(this.image, this.sprite.summary.x, this.sprite.summary.y, this.sprite.summary.width, this.sprite.summary.height, 0, 0, this.sprite.summary.width, this.sprite.summary.height);
   }
   ctx.restore();
 };
