@@ -14,54 +14,28 @@ FlappyBird.Core.PlayPauseButton = function () {
     y : 30,
   };
   this.sprite = new FlappyBird.Graphics.Sprite(26, 28, 110, 116);
-
-  this.disabled = false;
-
-  this._initListeners();
-};
-
-FlappyBird.Core.PlayPauseButton.prototype._initListeners = function () {
-  window.addEventListener('mouseup', this._onMouseUp.bind(this));
-  window.addEventListener('touchend', this._onTouchEnd.bind(this));
 };
 
 FlappyBird.Core.PlayPauseButton.prototype.isEnabled = function () {
-  return (FlappyBird.MODE === FlappyBird.PLAY || FlappyBird.MODE === FlappyBird.PAUSE)
+  return (FlappyBird.MODE === FlappyBird.PLAY || FlappyBird.MODE === FlappyBird.PAUSE);
 };
 
-FlappyBird.Core.PlayPauseButton.prototype._onMouseUp = function (e) {
+FlappyBird.Core.PlayPauseButton.prototype.hitTest = function (x, y) {
   if (!this.isEnabled()) {
-    return;
+    return false;
   }
 
-  e.preventDefault();
-  console.log(e);
-  this._hitTest(e.clientX, e.clientY);
-};
-
-FlappyBird.Core.PlayPauseButton.prototype._onTouchEnd = function (e) {
-  if (!this.isEnabled()) {
-    return;
-  }
-
-  e.preventDefault();
-  var touch = e.changedTouches[0];
-  console.log(touch);
-  this._hitTest(touch.clientX, touch.clientY);
-};
-
-FlappyBird.Core.PlayPauseButton.prototype._hitTest = function (x, y) {
-  if (x >= this.pos.x - (this.bounds.width / 2)
+  return (x >= this.pos.x - (this.bounds.width / 2)
       && x <= this.pos.x + (this.bounds.width / 2)
       && y >= this.pos.y - (this.bounds.height / 2)
-      && y <= this.pos.y + (this.bounds.height / 2)) {
+      && y <= this.pos.y + (this.bounds.height / 2));
+};
 
-    if (FlappyBird.MODE == FlappyBird.PAUSE) {
-      FlappyBird.MODE = FlappyBird.PLAY;
-    } else {
-      FlappyBird.MODE = FlappyBird.PAUSE;
-    }
-
+FlappyBird.Core.PlayPauseButton.prototype.toggle = function () {
+  if (FlappyBird.MODE == FlappyBird.PLAY) {
+    FlappyBird.MODE = FlappyBird.PAUSE;
+  } else if (FlappyBird.MODE == FlappyBird.PAUSE) {
+    FlappyBird.MODE = FlappyBird.PLAY;
   }
 };
 
