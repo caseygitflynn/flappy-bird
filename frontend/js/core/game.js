@@ -16,7 +16,8 @@ FlappyBird.Core = FlappyBird.Core || {};
 
 FlappyBird.IDLE       = 0;
 FlappyBird.PLAY       = 1;
-FlappyBird.GAME_OVER  = 2;
+FlappyBird.PAUSE      = 2;
+FlappyBird.GAME_OVER  = 3;
 
 FlappyBird.Core.Game = function (canvas) {
   FlappyBird.MODE = FlappyBird.IDLE;
@@ -34,6 +35,7 @@ FlappyBird.Core.Game = function (canvas) {
   this.bird = new FlappyBird.Core.Bird();
   this.idleOverlay = new FlappyBird.Core.IdleOverlay();
   this.gameOver = new FlappyBird.Core.GameOver();
+  this.playPauseButton = new FlappyBird.Core.PlayPauseButton();
 
   FlappyBird.Score = new FlappyBird.Core.Score();
 
@@ -102,6 +104,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
   this.bird.draw(this.ctx);
   this.idleOverlay.draw(this.ctx);
   this.gameOver.draw(this.ctx);
+  this.playPauseButton.draw(this.ctx);
   FlappyBird.Score.draw(this.ctx);
 
   requestAnimFrame(this.loop.bind(this));
