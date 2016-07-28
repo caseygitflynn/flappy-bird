@@ -9,8 +9,7 @@ FlappyBird.Graphics.Sprite = function (width, height, x, y) {
   this.height = height;
   this.x = x;
   this.y = y;
-  this.image = new Image();
-  this.image.src = "img/sprites.png";
+  this.image = FlappyBird.Assets.image('sprites');
 };
 
 FlappyBird.Graphics.Sprite.prototype.getFrame = function (frame) {

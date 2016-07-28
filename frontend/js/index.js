@@ -1,7 +1,8 @@
-var canvas = document.querySelector('canvas');
+(function () {
+  var canvas = document.querySelector('canvas');
 
-var birdImage = new Image();
-birdImage.addEventListener('load', function () {
-  var game = new FlappyBird.Core.Game(canvas);
-});
-birdImage.src = "img/sprites.png";
+  FlappyBird.Assets = new FlappyBird.AssetLoader();
+  FlappyBird.Assets.loadImage('img/sprites.png', 'sprites', function (image) {
+    var game = new FlappyBird.Core.Game(canvas);
+  });
+}());

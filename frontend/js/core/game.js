@@ -42,7 +42,7 @@ FlappyBird.Core.Game = function (canvas) {
 };
 
 FlappyBird.Core.Game.prototype.resize = function () {
-  var ratio = canvas.height / window.innerHeight;
+  var ratio = this.canvas.height / window.innerHeight;
   this.canvas.style.height = window.innerHeight + "px";
   this.canvas.width = window.innerWidth * ratio;
 };
