@@ -27,7 +27,13 @@ FlappyBird.Core.GameOver = function () {
       height : 116,
       x : 0,
       y : 918,
-    }
+    },
+    medal : {
+      width : 44,
+      height : 44,
+      x : 0,
+      y : 1034,
+    },
   };
   this.image = new Image();
   this.image.src = "img/sprites.png";
@@ -76,4 +82,15 @@ FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
     ctx.drawImage(this.image, this.sprite.summary.x, this.sprite.summary.y, this.sprite.summary.width, this.sprite.summary.height, 0, 0, this.sprite.summary.width, this.sprite.summary.height);
   }
   ctx.restore();
+
+  // Medal
+  var medal = FlappyBird.Score.getMedal();
+  if (medal !== null) {
+    ctx.save();
+    {
+      ctx.translate(this.pos.x - (this.sprite.summary.width / 2) + 26, this.pos.y + this.sprite.title.height + 63);
+      ctx.drawImage(this.image, this.sprite.medal.x + (medal * this.sprite.medal.width), this.sprite.medal.y, this.sprite.medal.width, this.sprite.medal.height, 0, 0, this.sprite.medal.width, this.sprite.medal.height);
+    }
+    ctx.restore();
+  }
 };

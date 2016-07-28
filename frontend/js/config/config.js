@@ -13,3 +13,8 @@ FlappyBird.PIPE_GAP = 125;
 FlappyBird.PIPE_SPACING = 175;
 FlappyBird.MIN_PIPE_Y = 150;
 FlappyBird.MAX_PIPE_Y = 345;
+
+FlappyBird.BRONZE_SCORE = 10;
+FlappyBird.SILVER_SCORE = 20;
+FlappyBird.GOLD_SCORE = 31;
+FlappyBird.PLATINUM_SCORE = 40;

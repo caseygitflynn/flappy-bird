@@ -19,7 +19,6 @@ FlappyBird.Core.Bird = function (x, y) {
     y : FlappyBird.GRAVITY,
   };
   this.angle = 0;
-  this.score = new FlappyBird.Core.Score();
   this.jumping = false;
   this.image = new Image();
   this.image.src = "img/sprites.png";
@@ -46,7 +45,6 @@ FlappyBird.Core.Bird.prototype.reset = function () {
     y : FlappyBird.GRAVITY,
   };
   this.angle = 0;
-  this.score = new FlappyBird.Core.Score();
   this.jumping = false;
   this.frame = 0;
 };

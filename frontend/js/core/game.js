@@ -35,6 +35,8 @@ FlappyBird.Core.Game = function (canvas) {
   this.idleOverlay = new FlappyBird.Core.IdleOverlay();
   this.gameOver = new FlappyBird.Core.GameOver();
 
+  FlappyBird.Score = new FlappyBird.Core.Score();
+
   this.loop();
 };
 
@@ -88,6 +90,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
     if (this.input.jump == true) {
       this.world.reset();
       this.bird.reset();
+      FlappyBird.Score.reset();
       FlappyBird.MODE = FlappyBird.IDLE;
       this.input.jump = false;
     }
@@ -97,7 +100,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
   this.bird.draw(this.ctx);
   this.idleOverlay.draw(this.ctx);
   this.gameOver.draw(this.ctx);
-  this.bird.score.draw(this.ctx);
+  FlappyBird.Score.draw(this.ctx);
 
   requestAnimFrame(this.loop.bind(this));
 };

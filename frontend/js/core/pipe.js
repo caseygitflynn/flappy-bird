@@ -88,7 +88,7 @@ FlappyBird.Core.Pipe.prototype.collides = function (bird) {
     } else {
       if (!this.passed) {
         this.passed = true;
-        bird.score.increase();
+        FlappyBird.Score.increase();
       }
     }
   }
