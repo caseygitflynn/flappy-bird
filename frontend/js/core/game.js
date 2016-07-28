@@ -48,6 +48,8 @@ FlappyBird.Core.Game.prototype.resize = function () {
 
 FlappyBird.Core.Game.prototype.loop = function () {
 
+  this.input.onFrame();
+
   if (FlappyBird.MODE == FlappyBird.IDLE) {
     this.bird.update();
     this.world.update();
@@ -67,8 +69,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
 
     if (this.world.collidesWithPipe(this.bird) || this.world.collidesWithGround(this.bird)) {
       FlappyBird.MODE = FlappyBird.GAME_OVER;
-      this.input.enabled = false;
-      this.input.jump = false;
+      this.input.suspend(60);
       this.gameOver.reset();
 
       FlappyBird.Score.commit();
@@ -86,7 +87,6 @@ FlappyBird.Core.Game.prototype.loop = function () {
     if (this.world.collidesWithGround(this.bird)) {
       this.bird.vel.y = 0;
       this.bird.acc.y = 0;
-      this.input.enabled = true;
     } 
 
     if (this.input.jump == true) {
@@ -94,7 +94,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
       this.bird.reset();
       FlappyBird.Score.reset();
       FlappyBird.MODE = FlappyBird.IDLE;
-      this.input.jump = false;
+      this.input.suspend(60);
     }
   }
 
