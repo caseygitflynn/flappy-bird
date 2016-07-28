@@ -39,7 +39,7 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
       {
         ctx.lineWidth = 1;
         ctx.strokeStyle = "#FF0000";
-        ctx.strokeRect(0, 0, this.bounds.width, this.sprite.top.height);
+        ctx.strokeRect(0, 0, this.bounds.width, this.topSprite.height);
         ctx.stroke();
       }
       ctx.restore();
@@ -58,7 +58,7 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
       {
         ctx.lineWidth = 1;
         ctx.strokeStyle = "#FF0000";
-        ctx.strokeRect(0, 0, this.bounds.width, this.sprite.bottom.height);
+        ctx.strokeRect(0, 0, this.bounds.width, this.bottomSprite.height);
         ctx.stroke();
       }
       ctx.restore();
