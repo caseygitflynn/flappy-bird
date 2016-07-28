@@ -25,7 +25,7 @@ FlappyBird.Core.IdleOverlay = function () {
 
 FlappyBird.Core.IdleOverlay.prototype.reset = function () {
   this.pos.titleSprite = {
-    x : FlappyBird.WIDTH / 2,
+    x : Math.round(FlappyBird.WIDTH / 2),
     y : FlappyBird.HEIGHT,
   };
 
