@@ -71,6 +71,8 @@ FlappyBird.Core.Game.prototype.loop = function () {
       this.input.jump = false;
       this.gameOver.reset();
 
+      FlappyBird.Score.commit();
+
       if (FlappyBird.DEBUG) {
         return;
       }

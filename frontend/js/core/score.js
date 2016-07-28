@@ -6,7 +6,7 @@ FlappyBird.Core = FlappyBird.Core || {};
 
 FlappyBird.Core.Score = function () {
   this.score = 0;
-  this.maxScore = 0;
+  this.maxScore = this.getHighScore();
   this.pos = {
     x : Math.floor(FlappyBird.WIDTH / 2),
     y : 40,
@@ -21,11 +21,29 @@ FlappyBird.Core.Score = function () {
   this.image.src = "img/sprites.png";
 };
 
-FlappyBird.Core.Score.prototype.reset = function () {
+FlappyBird.Core.Score.prototype.getHighScore = function () {
+  if (localStorage) {
+    var highScore = localStorage.getItem("highScore");
+
+    if (highScore) {
+      return parseInt(highScore, 10);
+    }
+  }
+
+  return 0;
+};
+
+FlappyBird.Core.Score.prototype.commit = function () {
   if (this.maxScore < this.score) {
     this.maxScore = this.score;
   }
 
+  if (localStorage) {
+    localStorage.setItem("highScore", this.maxScore);
+  }
+};
+
+FlappyBird.Core.Score.prototype.reset = function () {
   this.score = 0;
 };
 

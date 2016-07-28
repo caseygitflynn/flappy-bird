@@ -34,6 +34,12 @@ FlappyBird.Core.GameOver = function () {
       x : 0,
       y : 1034,
     },
+    numbers : {
+      width : 16,
+      height : 14,
+      x : 110,
+      y : 102,
+    }
   };
   this.image = new Image();
   this.image.src = "img/sprites.png";
@@ -60,6 +66,14 @@ FlappyBird.Core.GameOver.prototype.update = function () {
     this.pos.y = 150;
     this.vel.y = 0;
   }
+};
+
+FlappyBird.Core.GameOver.prototype._getNumberSprite = function (number) {
+  return parseInt(number, 10) * this.sprite.numbers.width + this.sprite.numbers.x;
+};
+
+FlappyBird.Core.GameOver.prototype._getScoreWidth = function (number) {
+  return number.toString(10).length * this.sprite.numbers.width;
 };
 
 FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
@@ -93,4 +107,40 @@ FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
     }
     ctx.restore();
   }
+
+  var score = FlappyBird.Score.score;
+
+  // Score
+  for (var i = 0; i < score.toString(10).length; i = i + 1) {
+    ctx.save();
+    {
+      ctx.translate(this.pos.x + 95 - this._getScoreWidth(score), this.pos.y + this.sprite.title.height + 53);
+      var offset = i * this.sprite.numbers.width;
+      ctx.translate(offset, 0);
+      ctx.drawImage(this.image, this._getNumberSprite(score.toString(10)[i]), this.sprite.numbers.y, this.sprite.numbers.width, this.sprite.numbers.height, 0, 0, this.sprite.numbers.width, this.sprite.numbers.height);
+    }
+    ctx.restore();
+  };
+
+  var best = FlappyBird.Score.maxScore;
+
+  // Best
+  for (var i = 0; i < best.toString(10).length; i = i + 1) {
+    ctx.save();
+    {
+      ctx.translate(this.pos.x + 95 - this._getScoreWidth(best), this.pos.y + this.sprite.title.height + 95);
+      var offset = i * this.sprite.numbers.width;
+      ctx.translate(offset, 0);
+      ctx.drawImage(this.image, this._getNumberSprite(best.toString(10)[i]), this.sprite.numbers.y, this.sprite.numbers.width, this.sprite.numbers.height, 0, 0, this.sprite.numbers.width, this.sprite.numbers.height);
+    }
+    ctx.restore();
+  };
+
+  // var best = FlappyBird.Score.maxScore;
+  // ctx.save();
+  // {
+  //   ctx.translate(this.pos.x - (this.sprite.summary.width / 2) + 26, this.pos.y + this.sprite.title.height + 63);
+  //   ctx.drawImage(this.image, this.sprite.medal.x + (medal * this.sprite.medal.width), this.sprite.medal.y, this.sprite.medal.width, this.sprite.medal.height, 0, 0, this.sprite.medal.width, this.sprite.medal.height);
+  // }
+  // ctx.restore();
 };
