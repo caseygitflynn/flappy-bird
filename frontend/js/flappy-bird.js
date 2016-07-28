@@ -3,4 +3,5 @@
 //=require assets/*.js
 //=require core/*.js
 //=require graphics/*.js
+//=require animations/*.js
 //=require index.js

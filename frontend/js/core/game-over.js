@@ -7,18 +7,11 @@ FlappyBird.Core.GameOver = function () {
     x : FlappyBird.WIDTH / 2,
     y : -38,
   };
-  this.acc = {
-    x : 0,
-    y : FlappyBird.GRAVITY * 2,
-  };
-  this.vel = {
-    x : 0,
-    y : 0,
-  };
   this.titleSprite = new FlappyBird.Graphics.Sprite(188, 38, 110, 64);
   this.summarySprite = new FlappyBird.Graphics.Sprite(226, 116, 0, 918);
   this.medalSprite = new FlappyBird.Graphics.Sprite(44, 44, 0, 1034);
   this.numbersSprite = new FlappyBird.Graphics.Sprite(16, 14, 108, 102);
+  this.animation = new FlappyBird.Animation.Easing(FlappyBird.Animation.EasingFunctions.EaseInOutCubic, 30, this.pos.y, 150);
 };
 
 FlappyBird.Core.GameOver.prototype.reset = function () {
@@ -26,22 +19,11 @@ FlappyBird.Core.GameOver.prototype.reset = function () {
     x : FlappyBird.WIDTH / 2,
     y : -38,
   };
-  this.vel = {
-    x : 0,
-    y : 0,
-  };
+  this.animation.reset();
 };
 
 FlappyBird.Core.GameOver.prototype.update = function () {
-  this.pos.x += this.vel.x;
-  this.pos.y += this.vel.y;
-  this.vel.x += this.acc.x;
-  this.vel.y += this.acc.y;
-
-  if (this.pos.y > 150) {
-    this.pos.y = 150;
-    this.vel.y = 0;
-  }
+  this.pos.y = Math.floor(this.animation.step());
 };
 
 FlappyBird.Core.GameOver.prototype.draw = function (ctx) {

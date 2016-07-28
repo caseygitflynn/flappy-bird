@@ -22,6 +22,7 @@ FlappyBird.Core.Bird = function (x, y) {
   this.jumping = false;
   this.sprite = new FlappyBird.Graphics.Sprite(34, 24, 0, 0);
   this.frame = 0;
+  this.bobbingAnimation = new FlappyBird.Animation.Bobbing(this.pos.y, 20, 0.1);
 };
 
 FlappyBird.Core.Bird.prototype.reset = function () {
@@ -40,6 +41,7 @@ FlappyBird.Core.Bird.prototype.reset = function () {
   this.angle = 0;
   this.jumping = false;
   this.frame = 0;
+  this.bobbingAnimation.angle = 0;
 };
 
 FlappyBird.Core.Bird.prototype.update = function () {
@@ -49,12 +51,7 @@ FlappyBird.Core.Bird.prototype.update = function () {
   }
 
   if (FlappyBird.MODE === FlappyBird.IDLE) {
-    if (this.frame < 30) {
-      this.pos.y--;
-    } else {
-      this.pos.y++;
-    }
-
+    this.pos.y = this.bobbingAnimation.step();
     return;
   }
 
@@ -76,7 +73,7 @@ FlappyBird.Core.Bird.prototype.update = function () {
 };
 
 FlappyBird.Core.Bird.prototype.getAnimationFrame = function () {
-  return Math.floor(this.frame * 2 / 20 % 3);
+  return Math.floor(this.frame * 0.1 % 3);
 };
 
 FlappyBird.Core.Bird.prototype.handleInput = function (input) {
