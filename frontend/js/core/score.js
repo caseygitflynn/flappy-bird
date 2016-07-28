@@ -65,7 +65,7 @@ FlappyBird.Core.Score.prototype.increase = function () {
 };
 
 FlappyBird.Core.Score.prototype.draw = function (ctx) {
-  if (FlappyBird.MODE == FlappyBird.IDLE) {
+  if (FlappyBird.MODE != FlappyBird.PLAY) {
     return;
   }
   

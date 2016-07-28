@@ -4,7 +4,7 @@ FlappyBird.Core = FlappyBird.Core || {};
 
 FlappyBird.Core.GameOver = function () {
   this.pos = {
-    x : FlappyBird.WIDTH / 2,
+    x : Math.round(FlappyBird.WIDTH / 2),
     y : 150,
   };
   this.titleSprite = new FlappyBird.Graphics.Sprite(188, 38, 110, 64);
