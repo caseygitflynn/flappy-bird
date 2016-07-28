@@ -20,14 +20,7 @@ FlappyBird.Core.Bird = function (x, y) {
   };
   this.angle = 0;
   this.jumping = false;
-  this.image = new Image();
-  this.image.src = "img/sprites.png";
-  this.sprite = {
-    width : 34,
-    height : 24,
-    x : 0,
-    y : 0,
-  };
+  this.sprite = new FlappyBird.Graphics.Sprite(34, 24, 0, 0);
   this.frame = 0;
 };
 
@@ -107,7 +100,7 @@ FlappyBird.Core.Bird.prototype.draw = function (ctx) {
     ctx.translate(this.pos.x - 6, this.pos.y - 2);
     ctx.rotate(this.angle);
     ctx.translate(-this.radius, -this.radius);
-    ctx.drawImage(this.image, this.getAnimationFrame() * this.sprite.width, this.sprite.y, this.sprite.width, this.sprite.height, 0, 0, this.sprite.width, this.sprite.height);
+    this.sprite.draw(ctx, this.getAnimationFrame());
   }
   ctx.restore();
 

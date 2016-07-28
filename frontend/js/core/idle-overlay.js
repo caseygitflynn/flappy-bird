@@ -15,14 +15,7 @@ FlappyBird.Core.IdleOverlay = function () {
     x : 0,
     y : 0,
   };
-  this.sprite = {
-    width : 174,
-    height : 44,
-    x : 110,
-    y : 20,
-  };
-  this.image = new Image();
-  this.image.src = "img/sprites.png";
+  this.sprite = new FlappyBird.Graphics.Sprite(174, 44, 110, 20);
 };
 
 FlappyBird.Core.IdleOverlay.prototype.reset = function () {
@@ -56,7 +49,7 @@ FlappyBird.Core.IdleOverlay.prototype.draw = function (ctx) {
   ctx.save();
   {
     ctx.translate(this.pos.x - (this.sprite.width / 2), this.pos.y);
-    ctx.drawImage(this.image, this.sprite.x, this.sprite.y, this.sprite.width, this.sprite.height, 0, 0, this.sprite.width, this.sprite.height);
+    this.sprite.draw(ctx);
   }
   ctx.restore();
 };

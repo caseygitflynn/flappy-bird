@@ -15,34 +15,10 @@ FlappyBird.Core.GameOver = function () {
     x : 0,
     y : 0,
   };
-  this.sprite = {
-    title : {
-      width : 188,
-      height : 38,
-      x : 110,
-      y : 64,
-    },
-    summary : {
-      width : 226,
-      height : 116,
-      x : 0,
-      y : 918,
-    },
-    medal : {
-      width : 44,
-      height : 44,
-      x : 0,
-      y : 1034,
-    },
-    numbers : {
-      width : 16,
-      height : 14,
-      x : 108,
-      y : 102,
-    }
-  };
-  this.image = new Image();
-  this.image.src = "img/sprites.png";
+  this.titleSprite = new FlappyBird.Graphics.Sprite(188, 38, 110, 64);
+  this.summarySprite = new FlappyBird.Graphics.Sprite(226, 116, 0, 918);
+  this.medalSprite = new FlappyBird.Graphics.Sprite(44, 44, 0, 1034);
+  this.numbersSprite = new FlappyBird.Graphics.Sprite(16, 14, 108, 102);
 };
 
 FlappyBird.Core.GameOver.prototype.reset = function () {
@@ -68,14 +44,6 @@ FlappyBird.Core.GameOver.prototype.update = function () {
   }
 };
 
-FlappyBird.Core.GameOver.prototype._getNumberSprite = function (number) {
-  return parseInt(number, 10) * this.sprite.numbers.width + this.sprite.numbers.x;
-};
-
-FlappyBird.Core.GameOver.prototype._getScoreWidth = function (number) {
-  return number.toString(10).length * this.sprite.numbers.width;
-};
-
 FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
   if (FlappyBird.MODE !== FlappyBird.GAME_OVER) {
     return;
@@ -84,16 +52,16 @@ FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
   // TITLE
   ctx.save();
   {
-    ctx.translate(this.pos.x - (this.sprite.title.width / 2), this.pos.y);
-    ctx.drawImage(this.image, this.sprite.title.x, this.sprite.title.y, this.sprite.title.width, this.sprite.title.height, 0, 0, this.sprite.title.width, this.sprite.title.height);
+    ctx.translate(this.pos.x - (this.titleSprite.width / 2), this.pos.y);
+    this.titleSprite.draw(ctx);
   }
   ctx.restore();
 
   // SUMMARY
   ctx.save();
   {
-    ctx.translate(this.pos.x - (this.sprite.summary.width / 2), this.pos.y + this.sprite.title.height + 20);
-    ctx.drawImage(this.image, this.sprite.summary.x, this.sprite.summary.y, this.sprite.summary.width, this.sprite.summary.height, 0, 0, this.sprite.summary.width, this.sprite.summary.height);
+    ctx.translate(this.pos.x - (this.summarySprite.width / 2), this.pos.y + 58);
+    this.summarySprite.draw(ctx);
   }
   ctx.restore();
 
@@ -102,45 +70,39 @@ FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
   if (medal !== null) {
     ctx.save();
     {
-      ctx.translate(this.pos.x - (this.sprite.summary.width / 2) + 26, this.pos.y + this.sprite.title.height + 63);
-      ctx.drawImage(this.image, this.sprite.medal.x + (medal * this.sprite.medal.width), this.sprite.medal.y, this.sprite.medal.width, this.sprite.medal.height, 0, 0, this.sprite.medal.width, this.sprite.medal.height);
+      ctx.translate(this.pos.x - (this.summarySprite.width / 2) + 26, this.pos.y + 101);
+      this.medalSprite.draw(ctx, medal);
     }
     ctx.restore();
   }
 
-  var score = FlappyBird.Score.score;
-
   // Score
+  var score = FlappyBird.Score.score;
+  var scoreWidth = FlappyBird.Utils.getStringSpriteWidth(score.toString(10), this.numbersSprite);
+
   for (var i = 0; i < score.toString(10).length; i = i + 1) {
     ctx.save();
     {
-      ctx.translate(this.pos.x + 93 - this._getScoreWidth(score), this.pos.y + this.sprite.title.height + 53);
-      var offset = i * this.sprite.numbers.width;
+      ctx.translate(this.pos.x + 93 - scoreWidth, this.pos.y + 91);
+      var offset = i * this.numbersSprite.width;
       ctx.translate(offset, 0);
-      ctx.drawImage(this.image, this._getNumberSprite(score.toString(10)[i]), this.sprite.numbers.y, this.sprite.numbers.width, this.sprite.numbers.height, 0, 0, this.sprite.numbers.width, this.sprite.numbers.height);
+      this.numbersSprite.draw(ctx, score.toString(10)[i]);
     }
     ctx.restore();
   };
 
-  var best = FlappyBird.Score.maxScore;
-
   // Best
+  var best = FlappyBird.Score.maxScore;
+  var bestWidth = FlappyBird.Utils.getStringSpriteWidth(best.toString(10), this.numbersSprite);
+
   for (var i = 0; i < best.toString(10).length; i = i + 1) {
     ctx.save();
     {
-      ctx.translate(this.pos.x + 93 - this._getScoreWidth(best), this.pos.y + this.sprite.title.height + 95);
-      var offset = i * this.sprite.numbers.width;
+      ctx.translate(this.pos.x + 93 - bestWidth, this.pos.y + 133);
+      var offset = i * this.numbersSprite.width;
       ctx.translate(offset, 0);
-      ctx.drawImage(this.image, this._getNumberSprite(best.toString(10)[i]), this.sprite.numbers.y, this.sprite.numbers.width, this.sprite.numbers.height, 0, 0, this.sprite.numbers.width, this.sprite.numbers.height);
+      this.numbersSprite.draw(ctx, best.toString(10)[i]);
     }
     ctx.restore();
   };
-
-  // var best = FlappyBird.Score.maxScore;
-  // ctx.save();
-  // {
-  //   ctx.translate(this.pos.x - (this.sprite.summary.width / 2) + 26, this.pos.y + this.sprite.title.height + 63);
-  //   ctx.drawImage(this.image, this.sprite.medal.x + (medal * this.sprite.medal.width), this.sprite.medal.y, this.sprite.medal.width, this.sprite.medal.height, 0, 0, this.sprite.medal.width, this.sprite.medal.height);
-  // }
-  // ctx.restore();
 };

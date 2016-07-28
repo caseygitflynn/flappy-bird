@@ -13,14 +13,7 @@ FlappyBird.Core.Ground = function () {
     x : -FlappyBird.SCROLL_SPEED,
     y : 0,
   };
-  this.sprite = {
-    width : 308,
-    height : 112,
-    x : 0,
-    y : 296,
-  };
-  this.image = new Image();
-  this.image.src = "img/sprites.png";
+  this.sprite = new FlappyBird.Graphics.Sprite(308, 112, 0, 296);
 };
 
 FlappyBird.Core.Ground.prototype.reset = function () {
@@ -49,7 +42,7 @@ FlappyBird.Core.Ground.prototype.draw = function (ctx) {
     ctx.save();
     {
       ctx.translate(this.pos.x + (i * this.sprite.width), this.pos.y);
-      ctx.drawImage(this.image, this.sprite.x, this.sprite.y, this.sprite.width, this.sprite.height, 0, 0, this.sprite.width, this.sprite.height);
+      this.sprite.draw(ctx);
     }
     ctx.restore();
   }

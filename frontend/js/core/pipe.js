@@ -18,22 +18,8 @@ FlappyBird.Core.Pipe = function (y) {
   };
   this.gap = FlappyBird.PIPE_GAP;
   this.passed = false;
-  this.sprite = {
-    top : {
-      width: 52,
-      height : 270,
-      x : 0,
-      y : 25,
-    },
-    bottom : {
-      width: 52,
-      height : 242,
-      x : 52,
-      y : 25,
-    }
-  };
-  this.image = new Image();
-  this.image.src = "img/sprites.png";
+  this.topSprite = new FlappyBird.Graphics.Sprite(52, 270, 0, 25);
+  this.bottomSprite = new FlappyBird.Graphics.Sprite(52, 242, 52, 25);
 };
 
 FlappyBird.Core.Pipe.prototype.update = function () {
@@ -45,8 +31,8 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
   // Top pipe
   ctx.save();
   {
-    ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y - (this.gap / 2) - (this.sprite.top.height));
-    ctx.drawImage(this.image, this.sprite.top.x, this.sprite.top.y, this.sprite.top.width, this.sprite.top.height, 0, 0, this.sprite.top.width, this.sprite.top.height);
+    ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y - (this.gap / 2) - (this.topSprite.height));
+    this.topSprite.draw(ctx);
 
     if (FlappyBird.DEBUG) {
       ctx.save();
@@ -65,7 +51,7 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
   ctx.save();
   {
     ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y + (this.gap / 2));
-    ctx.drawImage(this.image, this.sprite.bottom.x, this.sprite.bottom.y, this.sprite.bottom.width, this.sprite.bottom.height, 0, 0, this.sprite.bottom.width, this.sprite.bottom.height);
+    this.bottomSprite.draw(ctx);
 
     if (FlappyBird.DEBUG) {
       ctx.save();
