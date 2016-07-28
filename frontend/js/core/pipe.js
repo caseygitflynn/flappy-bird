@@ -18,8 +18,8 @@ FlappyBird.Core.Pipe = function (y) {
   };
   this.gap = FlappyBird.PIPE_GAP;
   this.passed = false;
-  this.topSprite = new FlappyBird.Graphics.Sprite(52, 270, 0, 25);
-  this.bottomSprite = new FlappyBird.Graphics.Sprite(52, 242, 52, 25);
+  this.topSprite = new FlappyBird.Graphics.Sprite(52, 270, 0, 24);
+  this.bottomSprite = new FlappyBird.Graphics.Sprite(52, 242, 52, 24);
 };
 
 FlappyBird.Core.Pipe.prototype.update = function () {
@@ -31,7 +31,7 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
   // Top pipe
   ctx.save();
   {
-    ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y - (this.gap / 2) - (this.topSprite.height));
+    ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y - Math.floor(this.gap / 2) - (this.topSprite.height));
     this.topSprite.draw(ctx);
 
     if (FlappyBird.DEBUG) {
@@ -50,7 +50,7 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
   // Bottom pipe
   ctx.save();
   {
-    ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y + (this.gap / 2));
+    ctx.translate(this.pos.x - (this.bounds.width / 2), this.pos.y + Math.floor(this.gap / 2));
     this.bottomSprite.draw(ctx);
 
     if (FlappyBird.DEBUG) {
