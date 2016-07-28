@@ -36,24 +36,29 @@ FlappyBird.Animation.EasingFunctions = {
   EaseInOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t },
 }
 
-FlappyBird.Animation.Easing = function (timingFunction, frames, from, to) {
+FlappyBird.Animation.Easing = function (timingFunction, frames, from, to, delay) {
+  this.delay = delay || 0;
   this.timingFunction = timingFunction;
   this.frames = frames;
-  this.frameCounter = 0;
+  this.frameCounter = -this.delay;
   this.from = from;
   this.to = to;
 };
 
 FlappyBird.Animation.Easing.prototype.step = function () {
   this.frameCounter++;
+  
+  if (this.frameCounter < 0) {
+    return this.from;
+  }
 
   if (this.frameCounter < this.frames) {
     return (this.timingFunction(this.frameCounter / this.frames) * (this.to - this.from) + this.from);
-  } else {
-    return this.to;
   }
+
+  return this.to;
 };
 
 FlappyBird.Animation.Easing.prototype.reset = function () {
-  this.frameCounter = 0;
+  this.frameCounter = -this.delay;
 };
