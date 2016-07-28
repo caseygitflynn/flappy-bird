@@ -4,7 +4,7 @@ FlappyBird.Core = FlappyBird.Core || {};
 
 FlappyBird.Core.GameOver = function () {
   this.pos = {
-    x : FlappyBird.WIDTH / 2,
+    x : Math.floor(FlappyBird.WIDTH / 2),
     y : -38,
   };
   this.acc = {
