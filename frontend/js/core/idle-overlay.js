@@ -5,11 +5,11 @@ FlappyBird.Core = FlappyBird.Core || {};
 FlappyBird.Core.IdleOverlay = function () {
   this.pos = {
     titleSprite : {
-      x : FlappyBird.WIDTH / 2,
+      x : Math.round(FlappyBird.WIDTH / 2),
       y : FlappyBird.HEIGHT,
     },
     tapSprite : {
-      x : FlappyBird.WIDTH / 2,
+      x : Math.round(FlappyBird.WIDTH / 2),
       y : 225,
     },
   };
@@ -28,7 +28,7 @@ FlappyBird.Core.IdleOverlay.prototype.reset = function () {
     x : FlappyBird.WIDTH / 2,
     y : FlappyBird.HEIGHT,
   };
-  
+
   this.tapSpriteAlpha = 0;
 
   this.titleSpriteAnimation.reset();
@@ -47,7 +47,7 @@ FlappyBird.Core.IdleOverlay.prototype.draw = function (ctx) {
 
   ctx.save();
   {
-    ctx.translate(this.pos.titleSprite.x - (this.titleSprite.width / 2), this.pos.titleSprite.y);
+    ctx.translate(this.pos.titleSprite.x - Math.round(this.titleSprite.width / 2), this.pos.titleSprite.y);
     this.titleSprite.draw(ctx);
   }
   ctx.restore();

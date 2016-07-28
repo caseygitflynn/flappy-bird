@@ -94,7 +94,7 @@ FlappyBird.Core.Bird.prototype.handleInput = function (input) {
 FlappyBird.Core.Bird.prototype.draw = function (ctx) {
   ctx.save();
   {
-    ctx.translate(this.pos.x - 6, this.pos.y - 2);
+    ctx.translate(Math.floor(this.pos.x - 6), Math.floor(this.pos.y - 2));
     ctx.rotate(this.angle);
     ctx.translate(-this.radius, -this.radius);
     this.sprite.draw(ctx, this.getAnimationFrame());
