@@ -83,7 +83,7 @@ FlappyBird.Core.Pipe.prototype.draw = function (ctx) {
 
 FlappyBird.Core.Pipe.prototype.collides = function (bird) {
   if (this.pos.x - (this.bounds.width / 2) < bird.pos.x + bird.radius && this.pos.x + (this.bounds.width / 2) > bird.pos.x - bird.radius) {
-    if (bird.pos.y - bird.radius <= this.pos.y - (this.gap / 2) || bird.pos.y + bird.radius > this.pos.y + (this.gap / 2)) {
+    if (bird.pos.y - bird.radius < this.pos.y - (this.gap / 2) || bird.pos.y + bird.radius > this.pos.y + (this.gap / 2)) {
       return true;
     } else {
       if (!this.passed) {

@@ -58,8 +58,8 @@ FlappyBird.Core.Game.prototype.loop = function () {
 
   if (FlappyBird.MODE == FlappyBird.PLAY) {
     this.idleOverlay.reset();
-    this.bird.update();
     this.bird.handleInput(this.input);
+    this.bird.update();
 
     this.world.update();
 
@@ -68,6 +68,10 @@ FlappyBird.Core.Game.prototype.loop = function () {
       this.input.enabled = false;
       this.input.jump = false;
       this.gameOver.reset();
+
+      if (FlappyBird.DEBUG) {
+        return;
+      }
     } 
   }
 
