@@ -94,7 +94,7 @@ FlappyBird.Core.Bird.prototype.handleInput = function (input) {
   }
 
   if (!this.jumping && input.jump === true) {
-    this.vel.y = -10;
+    this.vel.y = -FlappyBird.JUMP_VELOCITY;
     this.jumping = true;
   }
 

@@ -4,7 +4,8 @@ var FlappyBird = FlappyBird || {};
 
 FlappyBird.DEBUG = false;
 
-FlappyBird.GRAVITY = 0.6;
+FlappyBird.GRAVITY = 0.55;
+FlappyBird.JUMP_VELOCITY = 9.5;
 FlappyBird.MAX_VELOCITY = 20;
 FlappyBird.SCROLL_SPEED = 2;
 FlappyBird.BACKGROUND_SPEED = 1;
