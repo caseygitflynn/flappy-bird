@@ -43,6 +43,7 @@ FlappyBird.Core.IdleOverlay.prototype.update = function () {
   this.vel.y += this.acc.y;
 
   if (this.pos.y < 150) {
+    this.pos.y = 150;
     this.vel.y = 0;
   }
 };
