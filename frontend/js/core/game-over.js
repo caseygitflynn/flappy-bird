@@ -4,7 +4,7 @@ FlappyBird.Core = FlappyBird.Core || {};
 
 FlappyBird.Core.GameOver = function () {
   this.pos = {
-    x : Math.floor(FlappyBird.WIDTH / 2),
+    x : FlappyBird.WIDTH / 2,
     y : -38,
   };
   this.acc = {
@@ -37,7 +37,7 @@ FlappyBird.Core.GameOver = function () {
     numbers : {
       width : 16,
       height : 14,
-      x : 110,
+      x : 108,
       y : 102,
     }
   };
@@ -114,7 +114,7 @@ FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
   for (var i = 0; i < score.toString(10).length; i = i + 1) {
     ctx.save();
     {
-      ctx.translate(this.pos.x + 95 - this._getScoreWidth(score), this.pos.y + this.sprite.title.height + 53);
+      ctx.translate(this.pos.x + 93 - this._getScoreWidth(score), this.pos.y + this.sprite.title.height + 53);
       var offset = i * this.sprite.numbers.width;
       ctx.translate(offset, 0);
       ctx.drawImage(this.image, this._getNumberSprite(score.toString(10)[i]), this.sprite.numbers.y, this.sprite.numbers.width, this.sprite.numbers.height, 0, 0, this.sprite.numbers.width, this.sprite.numbers.height);
@@ -128,7 +128,7 @@ FlappyBird.Core.GameOver.prototype.draw = function (ctx) {
   for (var i = 0; i < best.toString(10).length; i = i + 1) {
     ctx.save();
     {
-      ctx.translate(this.pos.x + 95 - this._getScoreWidth(best), this.pos.y + this.sprite.title.height + 95);
+      ctx.translate(this.pos.x + 93 - this._getScoreWidth(best), this.pos.y + this.sprite.title.height + 95);
       var offset = i * this.sprite.numbers.width;
       ctx.translate(offset, 0);
       ctx.drawImage(this.image, this._getNumberSprite(best.toString(10)[i]), this.sprite.numbers.y, this.sprite.numbers.width, this.sprite.numbers.height, 0, 0, this.sprite.numbers.width, this.sprite.numbers.height);
