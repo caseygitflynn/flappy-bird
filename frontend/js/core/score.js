@@ -33,6 +33,10 @@ FlappyBird.Core.Score.prototype._getScoreWidth = function () {
 };
 
 FlappyBird.Core.Score.prototype.draw = function (ctx) {
+  if (FlappyBird.MODE == FlappyBird.IDLE) {
+    return;
+  }
+  
   for (var i = 0; i < this.score.toString(10).length; i = i + 1) {
     ctx.save();
     {

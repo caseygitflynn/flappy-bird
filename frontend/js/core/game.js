@@ -23,6 +23,8 @@ FlappyBird.Core.Game = function (canvas) {
 
   this.canvas = canvas;
   
+  this.resize();
+
   FlappyBird.WIDTH = this.canvas.width;
   FlappyBird.HEIGHT = this.canvas.height;
 
@@ -30,8 +32,16 @@ FlappyBird.Core.Game = function (canvas) {
   this.input = new FlappyBird.Core.Input();
   this.world = new FlappyBird.Core.World();
   this.bird = new FlappyBird.Core.Bird();
+  this.idleOverlay = new FlappyBird.Core.IdleOverlay();
+  this.gameOver = new FlappyBird.Core.GameOver();
 
   this.loop();
+};
+
+FlappyBird.Core.Game.prototype.resize = function () {
+  var ratio = canvas.height / window.innerHeight;
+  this.canvas.style.height = window.innerHeight + "px";
+  this.canvas.width = window.innerWidth * ratio;
 };
 
 FlappyBird.Core.Game.prototype.loop = function () {
@@ -39,6 +49,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
   if (FlappyBird.MODE == FlappyBird.IDLE) {
     this.bird.update();
     this.world.update();
+    this.idleOverlay.update();
 
     if (this.input.jump == true) {
       FlappyBird.MODE = FlappyBird.PLAY;
@@ -46,6 +57,7 @@ FlappyBird.Core.Game.prototype.loop = function () {
   }
 
   if (FlappyBird.MODE == FlappyBird.PLAY) {
+    this.idleOverlay.reset();
     this.bird.update();
     this.bird.handleInput(this.input);
 
@@ -55,11 +67,13 @@ FlappyBird.Core.Game.prototype.loop = function () {
       FlappyBird.MODE = FlappyBird.GAME_OVER;
       this.input.enabled = false;
       this.input.jump = false;
+      this.gameOver.reset();
     } 
   }
 
   if (FlappyBird.MODE == FlappyBird.GAME_OVER) {
     this.bird.update();
+    this.gameOver.update();
 
     if (this.world.collidesWithGround(this.bird)) {
       this.bird.vel.y = 0;
@@ -68,8 +82,8 @@ FlappyBird.Core.Game.prototype.loop = function () {
     } 
 
     if (this.input.jump == true) {
-      this.world = new FlappyBird.Core.World();
-      this.bird = new FlappyBird.Core.Bird();
+      this.world.reset();
+      this.bird.reset();
       FlappyBird.MODE = FlappyBird.IDLE;
       this.input.jump = false;
     }
@@ -77,6 +91,8 @@ FlappyBird.Core.Game.prototype.loop = function () {
 
   this.world.draw(this.ctx);
   this.bird.draw(this.ctx);
+  this.idleOverlay.draw(this.ctx);
+  this.gameOver.draw(this.ctx);
   this.bird.score.draw(this.ctx);
 
   requestAnimFrame(this.loop.bind(this));

@@ -7,7 +7,7 @@ FlappyBird.Core = FlappyBird.Core || {};
 FlappyBird.Core.Bird = function (x, y) {
   this.radius = 12;
   this.pos = {
-    x : FlappyBird.WIDTH / 2,
+    x : FlappyBird.WIDTH / 4,
     y : FlappyBird.HEIGHT / 2,
   };
   this.vel = {
@@ -29,6 +29,25 @@ FlappyBird.Core.Bird = function (x, y) {
     x : 0,
     y : 0,
   };
+  this.frame = 0;
+};
+
+FlappyBird.Core.Bird.prototype.reset = function () {
+  this.pos = {
+    x : FlappyBird.WIDTH / 4,
+    y : FlappyBird.HEIGHT / 2,
+  };
+  this.vel = {
+    x : 0,
+    y : 0,
+  };
+  this.acc = {
+    x : 0,
+    y : FlappyBird.GRAVITY,
+  };
+  this.angle = 0;
+  this.score = new FlappyBird.Core.Score();
+  this.jumping = false;
   this.frame = 0;
 };
 

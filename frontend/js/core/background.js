@@ -23,6 +23,13 @@ FlappyBird.Core.Background = function () {
   this.image.src = "img/sprites.png";
 };
 
+FlappyBird.Core.Background.prototype.reset = function () {
+  this.pos = {
+    x : 0,
+    y : 0,
+  };
+};
+
 FlappyBird.Core.Background.prototype.update = function () {
   this.pos.x += this.vel.x;
   this.pos.y += this.vel.y;

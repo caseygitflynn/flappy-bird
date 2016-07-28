@@ -23,6 +23,13 @@ FlappyBird.Core.Ground = function () {
   this.image.src = "img/sprites.png";
 };
 
+FlappyBird.Core.Ground.prototype.reset = function () {
+  this.pos = {
+    x : 0,
+    y : FlappyBird.HEIGHT - 50,
+  };
+};
+
 FlappyBird.Core.Ground.prototype.update = function () {
   this.pos.x += this.vel.x;
   this.pos.y += this.vel.y;

@@ -9,9 +9,15 @@ FlappyBird.Core.World = function () {
     width : FlappyBird.WIDTH,
     height : FlappyBird.HEIGHT,
   };
-  this.pipes = [new FlappyBird.Core.Pipe()];
+  this.pipes = [];
   this.background = new FlappyBird.Core.Background();
   this.ground = new FlappyBird.Core.Ground();
+};
+
+FlappyBird.Core.World.prototype.reset = function () {
+  this.pipes = [];
+  this.background.reset();
+  this.ground.reset();
 };
 
 FlappyBird.Core.World.prototype.update = function () {
